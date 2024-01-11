@@ -14,7 +14,9 @@ jobs:
 
       - name: Set up AWS Nuke
         run: |
-          sudo apt-get -y install aws-nuke
+          wget https://github.com/rebuy-de/aws-nuke/releases/download/v2.25.0/aws-nuke-v2.25.0-linux-amd64 -O aws-nuke
+          chmod +x aws-nuke
+          sudo mv aws-nuke /usr/local/bin/
 
       - name: Install expect
         run: sudo apt-get -y install expect     
@@ -24,4 +26,8 @@ jobs:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         run: |
-          echo "yes" | expect -c "spawn aws-nuke -c nuke-config.yml --no-dry-run; expect {Do you want to continue?} {send -- \r; expect eof}"
+          expect <<EOD
+            spawn /usr/local/bin/aws-nuke -c nuke-config.yml --no-dry-run
+            expect "Do you want to continue?" { send -- "\r" }
+            expect eof
+          EOD
