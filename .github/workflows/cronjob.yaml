@@ -1,8 +1,9 @@
-name: Scheduled AWS Nuke
+name: AWS Nuke on Main Push
 
 on:
-  schedule:
-    - cron: '*/5 * * * *'  # Run every 15 minutes
+  push:
+    branches:
+      - main
 
 jobs:
   aws-nuke:
