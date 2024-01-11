@@ -14,9 +14,7 @@ jobs:
 
       - name: Set up AWS Nuke
         run: |
-          wget https://github.com/rebuy-de/aws-nuke.git -O aws-nuke
-          chmod +x aws-nuke
-          sudo mv aws-nuke /usr/local/bin/
+          sudo apt-get -y install aws-nuke
 
       - name: Run AWS Nuke
         env:
