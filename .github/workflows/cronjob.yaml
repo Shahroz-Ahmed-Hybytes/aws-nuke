@@ -9,15 +9,18 @@ jobs:
   aws-nuke:
     runs-on: ubuntu-latest
     steps:
-      - name: Use Node.js 16
-        uses: actions/setup-node@v3
-        with:
-          node-version: '16'
+      - name: Install aws-nuke
+        run: |
+          wget https://github.com/rebuy-de/aws-nuke/releases/download/v2.15.0/aws-nuke-v2.15.0-linux-amd64 -O aws-nuke
+          chmod +x aws-nuke
+          sudo mv aws-nuke /usr/local/bin/
+
       - name: Checkout Repository
         uses: actions/checkout@v2
+
       - name: Run AWS Nuke
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         run: |
-          aws-nuke -c nuke-config.yml  # Adjust the command based on how AWS Nuke is executed in your environment
+          /usr/local/bin/aws-nuke -c nuke-config.yml  # Adjust the command based on how AWS Nuke is executed in your environment
