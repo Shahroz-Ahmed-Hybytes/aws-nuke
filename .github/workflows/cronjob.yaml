@@ -16,6 +16,9 @@ jobs:
         run: |
           sudo apt-get -y install aws-nuke
 
+      - name: Install expect
+        run: sudo apt-get -y install expect     
+
       - name: Run AWS Nuke
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
