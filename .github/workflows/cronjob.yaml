@@ -27,9 +27,8 @@ jobs:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         run: |
-          expect << 'EOD'
+          expect -c '
             spawn /usr/local/bin/aws-nuke -c nuke-config.yml --no-dry-run
             expect "Do you want to continue?" { send -- "\r" }
             expect eof
-          EOD
-      
+          '
