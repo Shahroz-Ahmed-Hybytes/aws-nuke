@@ -14,13 +14,9 @@ jobs:
 
       - name: Set up AWS Nuke
         run: |
-          wget -c https://github.com/rebuy-de/aws-nuke/releases/download/v2.25.0/aws-nuke-v2.25.0-linux-amd64.tar.gz -O aws-nuke
-          tar -xzvf aws-nuke
+          wget -c https://github.com/rebuy-de/aws-nuke/releases/download/v2.25.0/aws-nuke-v2.25.0-linux-amd64 -O aws-nuke
           chmod +x aws-nuke
           sudo mv aws-nuke /usr/local/bin/
-
-      - name: Install expect
-        run: sudo apt-get -y install expect     
 
       - name: Run AWS Nuke
         env:
